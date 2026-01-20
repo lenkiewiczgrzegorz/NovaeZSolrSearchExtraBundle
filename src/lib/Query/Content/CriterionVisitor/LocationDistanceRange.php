@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Novactive\EzSolrSearchExtra\Query\Content\CriterionVisitor;
 
-use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\CriterionInterface;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
 use Ibexa\Contracts\Solr\Query\CriterionVisitor;
 use Novactive\EzSolrSearchExtra\Query\Content\Criterion\LocationDistance;
@@ -16,7 +16,7 @@ class LocationDistanceRange extends CriterionVisitor
      *
      * @return bool
      */
-    public function canVisit(Criterion $criterion)
+    public function canVisit(CriterionInterface $criterion)
     {
         return
             $criterion instanceof LocationDistance
@@ -27,7 +27,7 @@ class LocationDistanceRange extends CriterionVisitor
               || Operator::BETWEEN === $criterion->operator);
     }
 
-    public function visit(Criterion $criterion, ?CriterionVisitor $subVisitor = null)
+    public function visit(CriterionInterface $criterion, ?CriterionVisitor $subVisitor = null)
     {
         $criterion->value = (array) $criterion->value;
 

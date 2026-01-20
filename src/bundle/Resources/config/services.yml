@@ -39,14 +39,14 @@ services:
 
   Novactive\EzSolrSearchExtra\FieldMapper\BinaryFileFieldMapper:
     arguments:
-      $ioService: '@ibexa.field_type.ezbinaryfile.io_service'
+      $ioService: '@ibexa.field_type.ibexa_binaryfile.io_service'
       $textExtractor: '@Novactive\EzSolrSearchExtra\TextExtractor\TikaTextExtractor'
 
   Novactive\EzSolrSearchExtra\FieldMapper\ContentTranslationFieldMapper\BinaryFileFullTextFieldMapper:
     lazy: true
     arguments:
       $binaryFileFieldTypeIdentifiers:
-      - ezbinaryfile
+      - ibexa_binaryfile
     calls:
     - ['setEnabled', ['enable_pdf_indexation']]
     tags:
@@ -175,7 +175,6 @@ services:
 
   Novactive\EzSolrSearchExtra\ResultExtractor\DocumentResultExtractor:
     arguments:
-      - '@ibexa.solr.query.content.facet_builder_visitor.aggregate'
       - '@ibexa.solr.query.content.aggregation_result_extractor.dispatcher'
       - '@Ibexa\Solr\Gateway\EndpointRegistry'
 

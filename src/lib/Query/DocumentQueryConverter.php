@@ -12,7 +12,7 @@ class DocumentQueryConverter extends NativeQueryConverter
     /**
      * @param \Novactive\EzSolrSearchExtra\Query\DocumentQuery $query
      */
-    public function convert(Query $query, array $languageSettings = [])
+    public function convert(Query $query, array $languageSettings = []): array
     {
         $params = parent::convert($query, $languageSettings);
 

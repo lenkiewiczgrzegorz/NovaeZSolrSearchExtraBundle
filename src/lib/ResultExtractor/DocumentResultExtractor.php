@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Novactive\EzSolrSearchExtra\ResultExtractor;
 
+use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Spellcheck;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchHit;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
@@ -14,15 +15,13 @@ use stdClass;
 class DocumentResultExtractor extends ResultExtractor
 {
     public function extract(
-        $data,
-        array $facetBuilders = [],
+        stdClass $data,
         array $aggregations = [],
         array $languageFilter = [],
         ?Spellcheck $spellcheck = null
     ) {
         $result = parent::extract(
             $data,
-            $facetBuilders,
             $aggregations,
             $languageFilter,
             $spellcheck
@@ -64,7 +63,7 @@ class DocumentResultExtractor extends ResultExtractor
         );
     }
 
-    protected function extractSearchHit(stdClass $doc, array $languageFilter): SearchHit
+    protected function extractSearchHit(stdClass $doc): SearchHit
     {
         return new SearchHit(
             [
@@ -75,7 +74,7 @@ class DocumentResultExtractor extends ResultExtractor
         );
     }
 
-    public function extractHit($hit)
+    public function extractHit(stdClass $hit): ValueObject
     {
         return $hit;
     }
